@@ -22,6 +22,7 @@ void initPin()
   pinMode(echoPin, INPUT);
 
   autoServo.write(0);
+  humServo.write(0);
   delay(100);
 }
 
@@ -29,7 +30,7 @@ void setup()
 {
   Serial.begin(9600);
   initPin();
-  Serial.println("Smart-Bin")
+  Serial.println("Smart-Bin");
 }
 
 void loop()
@@ -64,7 +65,7 @@ int readHum()
   return (1023 - humVals);
 }
 
-void readDis()
+int readDis()
 {
   int duration;
   int distance;
@@ -81,7 +82,7 @@ void readDis()
   return (distance);
 }
 
-void readDisAvg()
+int readDisAvg()
 {
   int disVals = 0;
   int totaldisVal = 0;
