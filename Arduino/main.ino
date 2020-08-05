@@ -16,107 +16,109 @@ int disVal = 0;
 
 void initPin()
 {
-  autoServo.attach(autoservoPin);
-  humServo.attach(humservoPin);
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
+		autoServo.attach(autoservoPin);
+		humServo.attach(humservoPin);
+		pinMode(trigPin, OUTPUT);
+		pinMode(echoPin, INPUT);
 
-  autoServo.write(0);
-  humServo.write(0);
-  delay(100);
+		autoServo.write(0);
+		humServo.write(0);
+		delay(100);
 }
 
 void setup()
 {
-  Serial.begin(9600);
-  initPin();
-  Serial.println("Smart-Bin");
+		Serial.begin(9600);
+		initPin();
+		Serial.println("Smart-Bin");
 }
 
 void loop()
 {
-  humVal = readHum();
-  disVal = readDisAvg();
+		humVal = readHum();
+		if (humVal > 50)
+		{
+				humServoOn();
+		}
+		if (humVal <= 50)
+		{
+				humServoOff();
+		}
 
-  if (humVal > 50)
-  {
-    humServoOn();
-  }
-  if (humVal <= 50)
-  {
-    humServoOff();
-  }
-  if (disVal < 50)
-  {
-    autoServoOn();
-  }
-  if (disVal >= 50)
-  {
-    autoServoOff();
-  }
+		disVal = readDisAvg();
+		if (disVal < 50)
+		{
+				autoServoOn();
+		}
+		if (disVal >= 50)
+		{
+				autoServoOff();
+		}
 
-  delay(5000);
+		delay(5000);
 }
 
 int readHum()
 {
-  int humVals = analogRead(humPin);
-  Serial.println("Nilai Kelembaban: " + String(humVals));
-  return (1023 - humVals);
+		int humVals = analogRead(humPin);
+		humVals = 1023 - humVals;
+		Serial.println("Nilai Kelembaban: " + String(humVals));
+		return humVals;
 }
 
 int readDis()
 {
-  int duration;
-  int distance;
+		int duration;
+		int distance;
 
-  digitalWrite(10, HIGH);
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(5);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(15);
-  digitalWrite(trigPin, LOW);
-  pinMode(echoPin, INPUT);
-  duration = pulseIn(echoPin, HIGH);
-  distance = (duration / 2) / 29.1;
-  return (distance);
+		digitalWrite(10, HIGH);
+		digitalWrite(trigPin, LOW);
+		delayMicroseconds(5);
+		digitalWrite(trigPin, HIGH);
+		delayMicroseconds(15);
+		digitalWrite(trigPin, LOW);
+		pinMode(echoPin, INPUT);
+		duration = pulseIn(echoPin, HIGH);
+		distance = (duration / 2) / 29.1;
+		return (distance);
 }
 
 int readDisAvg()
 {
-  int disVals = 0;
-  int totaldisVal = 0;
-  for (int i = 0; i < 3; i++)
-  {
-    disVals = readDis();
-    totaldisVal += disVals;
-  }
-  disVals = totaldisVal / 3;
-  return (disVals);
+		int disVals = 0;
+		int totaldisVal = 0;
+		for (int i = 0; i < 3; i++)
+		{
+				disVals = readDis();
+				totaldisVal += disVals;
+		}
+		disVals = totaldisVal / 3;
+		Serial.println("Nilai Ultrasonic: " + String(disVals));
+		return (disVals);
 }
 
 void humServoOn()
 {
-  humServo.write(180);
-  delay(1000);
-  humServo.write(90);
+		humServo.write(180);
+		delay(1000);
+		humServo.write(90);
 }
 
 void humServoOff()
 {
-  humServo.write(0);
-  delay(1000);
-  humServo.write(90);
+		humServo.write(0);
+		delay(1000);
+		humServo.write(90);
 }
 
 void autoServoOn()
 {
-  autoServo.write(0);
-  delay(3000);
-  autoServo.write(180);
+		autoServo.write(0);
+		delay(3000);
+		autoServo.write(180);
 }
 
 void autoServoOff()
 {
-  autoServo.write(0);
+		autoServo.write(0);
 }
