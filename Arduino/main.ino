@@ -99,6 +99,7 @@ int readDisAvg()
 
 void humServoOn()
 {
+		Serial.println("Servo Hum ON");
 		humServo.write(180);
 		delay(1000);
 		humServo.write(90);
@@ -106,6 +107,7 @@ void humServoOn()
 
 void humServoOff()
 {
+		Serial.println("Servo Hum OFF");
 		humServo.write(0);
 		delay(1000);
 		humServo.write(90);
@@ -113,6 +115,7 @@ void humServoOff()
 
 void autoServoOn()
 {
+		Serial.println("Servo Auto ON");
 		autoServo.write(0);
 		delay(3000);
 		autoServo.write(180);
@@ -120,5 +123,6 @@ void autoServoOn()
 
 void autoServoOff()
 {
-		autoServo.write(0);
+		Serial.println("Servo Auto OFF");
+		autoServo.write(180);
 }
