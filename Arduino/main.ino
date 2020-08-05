@@ -34,9 +34,9 @@ void setup() {
 void loop() {
   humVal = readHum();
   if (humVal > 50) {
-    humServoOn();
+    humServoRight();
   } else {
-    humServoOff();
+    humServoLeft();
   }
 
   disVal = readDisAvg();
@@ -82,14 +82,14 @@ int readDisAvg() {
   return (disVals);
 }
 
-void humServoOn() {
+void humServoRight() {
   Serial.println("Servo Hum ON");
   humServo.write(180);
   delay(1000);
   humServo.write(90);
 }
 
-void humServoOff() {
+void humServoLeft() {
   Serial.println("Servo Hum OFF");
   humServo.write(0);
   delay(1000);
