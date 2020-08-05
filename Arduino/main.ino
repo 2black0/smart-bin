@@ -40,7 +40,7 @@ void loop()
 		{
 				humServoOn();
 		}
-		if (humVal <= 50)
+		else
 		{
 				humServoOff();
 		}
@@ -50,7 +50,7 @@ void loop()
 		{
 				autoServoOn();
 		}
-		if (disVal >= 50)
+		else
 		{
 				autoServoOff();
 		}
