@@ -21,7 +21,7 @@ void initPin() {
   pinMode(echoPin, INPUT);
 
   autoServo.write(0);
-  humServo.write(0);
+  humServo.write(90);
   delay(100);
 }
 
@@ -42,8 +42,6 @@ void loop() {
   disVal = readDisAvg();
   if (disVal < 50) {
     autoServoOn();
-  } else {
-    autoServoOff();
   }
 
   delay(5000);
@@ -87,21 +85,22 @@ int readDisAvg() {
 void humServoOn() {
   Serial.println("Servo Hum ON");
   humServo.write(180);
-  delay(1500);
-  humServo.write(0);
+  delay(1000);
+  humServo.write(90);
 }
 
 void humServoOff() {
   Serial.println("Servo Hum OFF");
   humServo.write(0);
   delay(1000);
+  humServo.write(90);
 }
 
 void autoServoOn() {
   Serial.println("Servo Auto ON");
-  autoServo.write(180);
+  autoServo.write(0);
   delay(1500);
-  humServo.write(0);
+  humServo.write(180);
 }
 
 void autoServoOff() {
