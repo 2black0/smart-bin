@@ -39,7 +39,7 @@ void loop() {
     onStatus = true;
   }
 
-  delay(500);
+  delay(250);
   if (onStatus == true) {
     humVal = readHum();
     if (humVal > 50) {
