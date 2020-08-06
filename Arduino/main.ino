@@ -90,14 +90,14 @@ int readDisAvg() {
 }
 
 void humServoRight() {
-  Serial.println("Servo Hum ON");
+  Serial.println("Servo Hum RIGHT");
   humServo.write(180);
   delay(1000);
   humServo.write(90);
 }
 
 void humServoLeft() {
-  Serial.println("Servo Hum OFF");
+  Serial.println("Servo Hum LEFT");
   humServo.write(0);
   delay(1000);
   humServo.write(90);
