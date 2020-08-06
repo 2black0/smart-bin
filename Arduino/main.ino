@@ -49,6 +49,7 @@ void loop() {
     onStatus = false;
   }
 
+  Serial.println("Menunggu....");
   delay(5000);
 }
 
