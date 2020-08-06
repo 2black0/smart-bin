@@ -13,6 +13,8 @@ int led = 10;
 int humVal = 0;
 int disVal = 0;
 
+bool onStatus = false;
+
 void initPin() {
   autoServo.attach(autoservoPin);
   humServo.attach(humservoPin);
@@ -31,16 +33,20 @@ void setup() {
 }
 
 void loop() {
-  humVal = readHum();
-  if (humVal > 50) {
-    humServoRight();
-  } else {
-    humServoLeft();
-  }
-
   disVal = readDisAvg();
   if (disVal < 50) {
     autoServoOn();
+    onStatus = true;
+  }
+
+  if (onStatus) {
+    humVal = readHum();
+    if (humVal > 50) {
+      humServoRight();
+    } else {
+      humServoLeft();
+    }
+    onStatus = false;
   }
 
   delay(5000);
