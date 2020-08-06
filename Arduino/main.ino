@@ -39,7 +39,8 @@ void loop() {
     onStatus = true;
   }
 
-  if (onStatus) {
+  delay(500);
+  if (onStatus == true) {
     humVal = readHum();
     if (humVal > 50) {
       humServoRight();
