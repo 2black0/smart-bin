@@ -4,7 +4,6 @@ Servo autoServo;
 Servo humServo;
 
 int humPin = A0;
-
 int echoPin = 4;
 int trigPin = 5;
 int autoservoPin = 7;
@@ -99,12 +98,12 @@ void humServoLeft() {
 void autoServoOn() {
   Serial.println("Servo Auto ON");
   autoServo.write(0);
-  delay(1500);
+  delay(3000);
   humServo.write(180);
 }
 
 void autoServoOff() {
   Serial.println("Servo Auto OFF");
-  autoServo.write(0);
+  autoServo.write(180);
   delay(1000);
 }
