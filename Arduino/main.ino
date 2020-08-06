@@ -21,7 +21,7 @@ void initPin() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
-  autoServo.write(0);
+  autoServo.write(180);
   humServo.write(90);
   delay(100);
 }
